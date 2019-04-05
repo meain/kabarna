@@ -7,3 +7,67 @@ body {
   padding: 0;
   font-family: sans-serif;
 }
+
+.flex {
+  display: flex;
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.vert {
+  flex-direction: column;
+}
+
+.f1 {
+  flex: 1;
+}
+
+.fsb {
+  justify-content: space-between;
+}
+
+.shadow {
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 0px 2px rgba(0, 0, 0, 0.24);
+}
+
+.br5 {
+  border-radius: 5;
+}
+
+.br {
+  border-right: 1px solid #ccc;
+}
+
+.wh {
+  width: 100%;
+  height: 100%;
+}
+
+.w {
+  width: 100%;
+}
+.h {
+  height: 100%;
+}
+
+.pad {
+  padding: 10px;
+}
+
+.caps {
+  text-transform: uppercase;
+}
+
+.bgr {
+  background-color: #f5f5f5;
+}
+
+.btn {
+  padding: 5px 20px;
+  background-color: white;
+  border-radius: 2px;
+}
