@@ -1,0 +1,17 @@
+{
+  "rules": {
+    "block-no-empty": null,
+    "max-empty-lines": 4,
+    "string-quotes": "single",
+    "function-url-quotes": "always",
+    "declaration-colon-newline-after": null,
+    "font-family-name-quotes": "always-unless-keyword",
+    "number-leading-zero": "always",
+    "max-nesting-depth": 3,
+    "indentation": 2,
+    "value-list-comma-space-after": "always",
+    "color-no-invalid-hex": true,
+    "comment-empty-line-before": "never",
+    "block-opening-brace-space-before": "always"
+  }
+}
