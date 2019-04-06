@@ -39,58 +39,79 @@ const Preprocessing = ({ whole, setState, ...state }) => {
     acceptedFiles.forEach(file => reader.readAsBinaryString(file))
   }
 
+  // console.log('state.embedding:', state.embedding)
+  // console.log('state.input:', state.input)
+
   return (
     <div className="Preprocessing center f1 wh vert">
-      <div className="Input pad w flex">
-        <Dropzone onDrop={acceptedFiles => onDrop('input', acceptedFiles)}>
-          {({ getRootProps, getInputProps }) => (
-            <section className="DropTarget f1 flex center">
-              <div {...getRootProps()}>
-                <input {...getInputProps()} />
-                <p className="tc">Drag 'n' drop some files here, or click to select files</p>
-              </div>
-            </section>
-          )}
-        </Dropzone>
+      <div className="Input pad w flex fsb">
+        <div className="flex center vert w4">
+          <Dropzone onDrop={acceptedFiles => onDrop('input', acceptedFiles)}>
+            {({ getRootProps, getInputProps }) => (
+              <section className="DropTarget w f1 flex center pad">
+                <div {...getRootProps()}>
+                  <input {...getInputProps()} />
+                  <p className="tc pad">
+                    {state.input === undefined
+                      ? 'Drag and drop, or click to select file'
+                      : 'OK, loaded'}
+                  </p>
+                </div>
+              </section>
+            )}
+          </Dropzone>{' '}
+          <div>Data file (json)</div>
+        </div>
 
-        <Dropzone onDrop={acceptedFiles => onDrop('embedding', acceptedFiles)}>
-          {({ getRootProps, getInputProps }) => (
-            <section className="DropTarget f1 flex center">
-              <div {...getRootProps()}>
-                <input {...getInputProps()} />
-                <p className="tc">Drag 'n' drop some files here, or click to select files</p>
-              </div>
-            </section>
-          )}
-        </Dropzone>
+        <div className="flex center vert w4">
+          <Dropzone onDrop={acceptedFiles => onDrop('embedding', acceptedFiles)}>
+            {({ getRootProps, getInputProps }) => (
+              <section className="DropTarget w f1 flex center pad">
+                <div {...getRootProps()}>
+                  <input {...getInputProps()} />
+                  <p className="tc pad">
+                    {state.embedding === undefined
+                      ? 'Drag and drop, or click to select file'
+                      : 'OK, loaded'}
+                  </p>
+                </div>
+              </section>
+            )}
+          </Dropzone>
+          <div>Embedding file (text)</div>
+        </div>
       </div>
-      <div className="f1 pad w">
-        <form className="flex vert" onChange={onChange}>
-          <div>
-            <label>
-              <input type="checkbox" />
-              Custom padding
-            </label>{' '}
-            <label className={state.customPadding ? '' : 'hide'}>
-              | Pad length <input type="number" />
-            </label>
-          </div>
-
+      <div className="f1 pad w flex">
+        <form className="flex vert pad2 br f1" onChange={onChange}>
+          <h3>OPTIONS</h3>
           <label>
             <input type="checkbox" />
-            Start token
+            <div>Custom padding</div>
+          </label>
+          <label className={state.customPadding ? '' : 'hide'}>
+            <div>Pad length:</div>
+            <input type="number" />
           </label>
 
           <label>
             <input type="checkbox" />
-            End token
+            <div>Start token</div>
           </label>
 
           <label>
             <input type="checkbox" />
-            Lower input
+            <div>End token</div>
+          </label>
+
+          <label>
+            <input type="checkbox" />
+            <div>Lower input</div>
           </label>
         </form>
+        <div className="f1 pad scroll">
+          <h3>INPUT</h3>
+          {JSON.stringify(state.input || {})}
+        </div>
       </div>
     </div>
   )

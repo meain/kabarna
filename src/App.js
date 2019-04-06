@@ -21,7 +21,7 @@ class App extends Component {
         start: false,
         end: false,
         lower: false,
-        input: {},
+        input: undefined,
       },
       modelselection: {
         selectedOption: { value: 'lstm', label: 'LSTM' },

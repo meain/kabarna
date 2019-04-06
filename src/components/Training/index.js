@@ -12,6 +12,8 @@ import React, { useState } from 'react'
 import Select from 'react-select'
 
 import { train, save } from './model'
+import run from './run.svg'
+import download from './download.svg'
 
 const Training = ({ whole, setState, ...state }) => {
   const [trainStats, setTrainStats] = useState([])
@@ -115,50 +117,55 @@ const Training = ({ whole, setState, ...state }) => {
 
       <div className="Controlls flex center sb">
         <button className="Play" onClick={trainModel}>
+          <img src={run} />
           Train
         </button>
         <button className="Play" onClick={() => save('model', modelConfig)}>
+          <img src={download} />
           Download
         </button>
       </div>
 
       <form className="flex vert pad" onChange={onChange}>
         <label className="pad">
-          Epochs <input type="number" />
-        </label>
-        <label className="pad">
-          Validation Split <input type="number" />
-        </label>
-        <label className="pad">
-          Learning rate
+          <div>Epochs:</div>
           <input type="number" />
         </label>
         <label className="pad">
-          Batch size
+          <div>Validation Split:</div>
           <input type="number" />
         </label>
-        <Select
-          className="pad"
-          style={{ width: 400 }}
-          value={state.optimizer}
-          onChange={onOptimizerChange}
-          options={optimizers}
-        />
-        <Select
-          className="pad"
-          style={{ width: 400 }}
-          value={state.loss}
-          onChange={onLossChange}
-          options={lossess}
-        />
-        <Select
-          className="pad"
-          isMulti
-          style={{ width: 400 }}
-          value={state.metrics}
-          onChange={onMetricsChange}
-          options={metrics}
-        />
+        <label className="pad">
+          <div>Learning rate:</div>
+          <input type="number" />
+        </label>
+        <label className="pad">
+          <div>Batch size:</div>
+          <input type="number" />
+        </label>
+        <label>
+          <div>Optimizer:</div>
+          <Select
+            className="Sel"
+            value={state.optimizer}
+            onChange={onOptimizerChange}
+            options={optimizers}
+          />
+        </label>
+        <label>
+          <div>Loss:</div>
+          <Select className="Sel" value={state.loss} onChange={onLossChange} options={lossess} />
+        </label>
+        <label>
+          <div>Metrics:</div>
+          <Select
+            className="Sel"
+            isMulti
+            value={state.metrics}
+            onChange={onMetricsChange}
+            options={metrics}
+          />
+        </label>
       </form>
     </div>
   )

@@ -2,7 +2,7 @@
   width: 100vw;
   height: 100vh;
   display: flex;
-  font-family: 'Operator Mono', monaco, monospace,sans-serif;
+  font-family: monaco, monospace;
 }
 
 .Header {
@@ -28,4 +28,9 @@
   border: 1px solid #ccc;
   margin: 0 30px;
   color: #ccc;
+}
+
+.Sel {
+  width: 500px;
+  margin-left: 5px;
 }

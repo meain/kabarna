@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { predict } from '../Training/model'
+import './index.css'
 
 const Predict = ({ whole }) => {
   const [prediction, setPrediction] = useState('')
@@ -10,10 +11,9 @@ const Predict = ({ whole }) => {
   }
 
   return (
-    <div>
-      <input onChange={oc} type="string" />
-
-      <div>{prediction}</div>
+    <div className="Predict flex center wh vert">
+      <input onChange={oc} type="string" placeholder="Type to predict" />
+      {prediction && <div>Prediction: {prediction}</div>}
     </div>
   )
 }
