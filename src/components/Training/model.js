@@ -1,5 +1,5 @@
 import * as tf from '@tensorflow/tfjs'
-import { prepare } from '../../utils/preprocessing'
+import { prepare, encodeString } from '../../utils/preprocessing'
 import { shuffle } from '../../utils/utils'
 import { saveAs } from 'file-saver'
 
@@ -8,6 +8,21 @@ let bestModelWeights
 let modelMaxLen = 0
 let modelW2i = {}
 let modelL2i = {}
+
+export const predict = (input, split, start, end) => {
+  const encoded = encodeString(input, modelW2i, ' ', start, end)
+  console.log('encoded', encoded)
+
+  // const result = model.predict(tf.tensor2d([5, 0, 0], [1, 3]))
+  const result = model.predict(tf.tensor2d(encoded, [1, encoded.length]))
+  const res = tf.argMax(result).arraySync()[0]
+  for (let key of Object.keys(modelL2i)) {
+    if (modelL2i[key] === res) {
+      return key
+    }
+  }
+  return null
+}
 
 export const save = (name = 'model', modelConfig) => {
   model.save('downloads://model')
@@ -129,24 +144,26 @@ export const train = (input, embedding, modelConfig, callback) => {
   model
     .fit(xs, ys, {
       epochs: modelConfig.params.epochs,
+      batchSize: modelConfig.params.batch,
+      validationSplit: modelConfig.params.split,
       callbacks: {
         onEpochEnd: (epoch, logs) => {
-          if (logs.acc > bestAcc) {
-            bestAcc = logs.val_loss
+          if (logs.val_acc > bestAcc) {
+            bestAcc = logs.val_acc
             bestModelWeights = model.getWeights()
             // model.save(bestModelPath)
           }
           callback(epoch, logs)
         },
         onTrainEnd: () => {
-          model.setWeights(bestModelWeights)
+          // model.setWeights(bestModelWeights)
         },
       },
     })
     .then(() => {
       // Use the model to do inference on a data point the model hasn't seen before:
       // Open the browser devtools to see the output
-      // model.setWeights(bestModelWeights)
+      model.setWeights(bestModelWeights)
       // const result = model.predict(tf.tensor2d([5, 0, 0], [1, 3]))
       // tf.argMax(result).print()
     })

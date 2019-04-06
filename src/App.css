@@ -2,7 +2,7 @@
   width: 100vw;
   height: 100vh;
   display: flex;
-  font-family: monaco, monospace;
+  font-family: 'Operator Mono', monaco, monospace,sans-serif;
 }
 
 .Header {

@@ -1,5 +1,4 @@
 import './index.css'
-
 import {
   CartesianGrid,
   Line,
@@ -70,6 +69,7 @@ const Training = ({ whole, setState, ...state }) => {
     ns.epochs = parseInt(inputs[0].value)
     ns.split = parseFloat(inputs[1].value)
     ns.lr = parseFloat(inputs[2].value)
+    ns.batch = parseFloat(inputs[3].value)
     setState(ns)
   }
 
@@ -81,10 +81,10 @@ const Training = ({ whole, setState, ...state }) => {
             {Math.round((trainStats.length > 0 ? trainStats[trainStats.length - 1].acc : 0) * 100)}%
           </div>
           <div>Train accuracy</div>
-          <ResponsiveContainer width="100%" height={400}>
+          <ResponsiveContainer width="90%" height={400}>
             <LineChart data={trainStats}>
-              <Line type="monotone" dataKey="acc" stroke="#8884d8" />
-              <Line type="monotone" dataKey="loss" stroke="hotpink" />
+              <Line isAnimationActive={false} type="monotone" dataKey="acc" stroke="#8884d8" />
+              <Line isAnimationActive={false} type="monotone" dataKey="loss" stroke="hotpink" />
               <CartesianGrid stroke="#ccc" />
               <XAxis dataKey="epoch" />
               <YAxis />
@@ -94,13 +94,16 @@ const Training = ({ whole, setState, ...state }) => {
         </div>
         <div className="Accuracy flex center vert f1">
           <div className="Percentage">
-            {Math.round((trainStats.length > 0 ? trainStats[trainStats.length - 1].acc : 0) * 100)}%
+            {Math.round(
+              (trainStats.length > 0 ? trainStats[trainStats.length - 1].val_acc : 0) * 100
+            )}
+            %
           </div>
           <div>Test accuracy</div>
-          <ResponsiveContainer width="100%" height={400}>
+          <ResponsiveContainer width="90%" height={400}>
             <LineChart data={trainStats}>
-              <Line type="monotone" dataKey="acc" stroke="#8884d8" />
-              <Line type="monotone" dataKey="loss" stroke="hotpink" />
+              <Line isAnimationActive={false} type="monotone" dataKey="val_acc" stroke="#8884d8" />
+              <Line isAnimationActive={false} type="monotone" dataKey="val_loss" stroke="hotpink" />
               <CartesianGrid stroke="#ccc" />
               <XAxis dataKey="epoch" />
               <YAxis />
@@ -128,6 +131,10 @@ const Training = ({ whole, setState, ...state }) => {
         </label>
         <label className="pad">
           Learning rate
+          <input type="number" />
+        </label>
+        <label className="pad">
+          Batch size
           <input type="number" />
         </label>
         <Select

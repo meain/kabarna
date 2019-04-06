@@ -4,6 +4,7 @@ import { Router, Link } from '@reach/router'
 import React, { Component } from 'react'
 
 import ModelSelection from './components/ModelSelection'
+import Predict from './components/Predict'
 import Preprocessing from './components/Preprocessing'
 import Training from './components/Training'
 
@@ -43,7 +44,8 @@ class App extends Component {
       },
       training: {
         epochs: 10,
-        split: 0,
+        split: 0.1,
+        batch: 5,
         lr: 0.001,
         optimizer: null,
         loss: null,
@@ -64,6 +66,22 @@ class App extends Component {
     return (
       <div className="App flex vert">
         <div className="Header shadow">MAKKA KABARNA</div>
+
+        <div className="Footer flex center fsb pad shadow">
+          <button className="btn">
+            <Link to="preprocessing">Preprocessing</Link>
+          </button>
+          <button className="btn">
+            <Link to="modelselection">Model Selection</Link>
+          </button>
+          <button className="btn">
+            <Link to="training">Training</Link>
+          </button>
+          <button className="btn">
+            <Link to="predict">Predict</Link>
+          </button>
+        </div>
+
         <Router className="f1">
           <Preprocessing
             path="/preprocessing"
@@ -89,18 +107,8 @@ class App extends Component {
               this.ss('training', value)
             }}
           />
+          <Predict path="/predict" whole={this.state} />
         </Router>
-        <div className="Footer flex center fsb pad shadow">
-          <button className="btn">
-            <Link to="preprocessing">Preprocessing</Link>
-          </button>
-          <button className="btn">
-            <Link to="modelselection">Model Selection</Link>
-          </button>
-          <button className="btn">
-            <Link to="training">Training</Link>
-          </button>
-        </div>
       </div>
     )
   }
