@@ -1,17 +1,9 @@
 import './index.css'
 
-import { useDropzone } from 'react-dropzone'
-import React, { useState, useCallback } from 'react'
+import React from 'react'
+import Dropzone from 'react-dropzone'
 
-const Preprocessing = () => {
-  const [state, setState] = useState({
-    customPadding: false,
-    padding: 0,
-    start: false,
-    end: false,
-    lower: false,
-  })
-
+const Preprocessing = ({ whole, setState, ...state }) => {
   const onChange = event => {
     const inputs = [...event.currentTarget.elements]
     const ns = { ...state }
@@ -22,30 +14,55 @@ const Preprocessing = () => {
     ns.lower = inputs[4].checked
     setState(ns)
   }
-  const onDrop = useCallback(acceptedFiles => {
-    // Do something with the files
-  }, [])
-  const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop })
+
+  const onDrop = (type, acceptedFiles) => {
+    const reader = new FileReader()
+
+    reader.onabort = () => console.log('file reading was aborted')
+    reader.onerror = () => console.log('file reading has failed')
+    reader.onload = () => {
+      // Do whatever you want with the file contents
+      const binaryStr = reader.result
+      let input = binaryStr
+      if (type === 'input') {
+        input = JSON.parse(binaryStr)
+      } else {
+        if (binaryStr[binaryStr.length - 1] === '\n') {
+          input = binaryStr.substring(0, binaryStr.length - 1)
+        }
+      }
+      const ns = { ...state }
+      ns[type] = input
+      setState(ns)
+    }
+
+    acceptedFiles.forEach(file => reader.readAsBinaryString(file))
+  }
 
   return (
     <div className="Preprocessing center f1 wh vert">
       <div className="Input pad w flex">
-        <div {...getRootProps()} className="DropTarget f1 flex center">
-          <input {...getInputProps()} className="tc" />
-          {isDragActive ? (
-            <p className="tc">Drop the files here ...</p>
-          ) : (
-            <p className="tc">Drop your data file here</p>
+        <Dropzone onDrop={acceptedFiles => onDrop('input', acceptedFiles)}>
+          {({ getRootProps, getInputProps }) => (
+            <section className="DropTarget f1 flex center">
+              <div {...getRootProps()}>
+                <input {...getInputProps()} />
+                <p className="tc">Drag 'n' drop some files here, or click to select files</p>
+              </div>
+            </section>
           )}
-        </div>
-        <div {...getRootProps()} className="DropTarget f1 flex center">
-          <input {...getInputProps()} />
-          {isDragActive ? (
-            <p className="tc">Drop the files here ...</p>
-          ) : (
-            <p className="tc">Drop custom embeddings</p>
+        </Dropzone>
+
+        <Dropzone onDrop={acceptedFiles => onDrop('embedding', acceptedFiles)}>
+          {({ getRootProps, getInputProps }) => (
+            <section className="DropTarget f1 flex center">
+              <div {...getRootProps()}>
+                <input {...getInputProps()} />
+                <p className="tc">Drag 'n' drop some files here, or click to select files</p>
+              </div>
+            </section>
           )}
-        </div>
+        </Dropzone>
       </div>
       <div className="f1 pad w">
         <form className="flex vert" onChange={onChange}>

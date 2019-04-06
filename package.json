@@ -15,11 +15,14 @@
   "dependencies": {
     "@reach/router": "^1.2.1",
     "@tensorflow/tfjs": "^1.0.4",
+    "file-saver": "^2.0.1",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-dropzone": "^10.1.0",
     "react-jsonschema-form": "^1.4.0",
-    "react-select": "^2.4.2"
+    "react-select": "^2.4.2",
+    "react-use-localstorage": "^3.0.1-alpha.0",
+    "recharts": "^1.5.0"
   },
   "devDependencies": {
     "babel-core": "^6.26.3",
