@@ -71,3 +71,11 @@ body {
   background-color: white;
   border-radius: 2px;
 }
+
+.hide {
+  display: none;
+}
+
+.tc {
+  text-align: center;
+}

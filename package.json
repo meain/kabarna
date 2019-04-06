@@ -14,8 +14,12 @@
   "license": "MIT",
   "dependencies": {
     "@reach/router": "^1.2.1",
-    "react": "^16.4.1",
-    "react-dom": "^16.4.1"
+    "@tensorflow/tfjs": "^1.0.4",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "react-dropzone": "^10.1.0",
+    "react-jsonschema-form": "^1.4.0",
+    "react-select": "^2.4.2"
   },
   "devDependencies": {
     "babel-core": "^6.26.3",
@@ -24,14 +28,14 @@
     "babel-preset-flow": "^6.23.0",
     "babel-preset-react": "^6.24.1",
     "cssnano": "^4.1.10",
-    "eslint": "^5.14.0",
+    "eslint": "^5.16.0",
     "eslint-config-airbnb": "^17.0.0",
-    "eslint-config-prettier": "^4.0.0",
-    "eslint-loader": "^2.0.0",
-    "eslint-plugin-flowtype": "^3.4.2",
-    "eslint-plugin-import": "^2.12.0",
-    "eslint-plugin-jsx-a11y": "^6.0.3",
-    "eslint-plugin-react": "^7.9.1",
+    "eslint-config-prettier": "^4.1.0",
+    "eslint-loader": "^2.1.2",
+    "eslint-plugin-flowtype": "^3.5.1",
+    "eslint-plugin-import": "^2.16.0",
+    "eslint-plugin-jsx-a11y": "^6.2.1",
+    "eslint-plugin-react": "^7.12.4",
     "flow-bin": "^0.93.0",
     "parcel-bundler": "^1.12.3",
     "stylelint-config-standard": "^18.2.0"
