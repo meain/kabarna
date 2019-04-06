@@ -15,13 +15,15 @@ export const predict = (input, split, start, end) => {
 
   // const result = model.predict(tf.tensor2d([5, 0, 0], [1, 3]))
   const result = model.predict(tf.tensor2d(encoded, [1, encoded.length]))
-  const res = tf.argMax(result).arraySync()[0]
-  for (let key of Object.keys(modelL2i)) {
-    if (modelL2i[key] === res) {
-      return key
-    }
-  }
-  return null
+  const res = result.arraySync()
+  return { res, modelL2i }
+  // const res = tf.argMax(result).arraySync()[0]
+  // for (let key of Object.keys(modelL2i)) {
+  //   if (modelL2i[key] === res) {
+  //     return key
+  //   }
+  // }
+  // return null
 }
 
 export const save = (name = 'model', modelConfig) => {

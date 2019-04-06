@@ -126,46 +126,52 @@ const Training = ({ whole, setState, ...state }) => {
         </button>
       </div>
 
-      <form className="flex vert pad" onChange={onChange}>
-        <label className="pad">
-          <div>Epochs:</div>
-          <input type="number" />
-        </label>
-        <label className="pad">
-          <div>Validation Split:</div>
-          <input type="number" />
-        </label>
-        <label className="pad">
-          <div>Learning rate:</div>
-          <input type="number" />
-        </label>
-        <label className="pad">
-          <div>Batch size:</div>
-          <input type="number" />
-        </label>
-        <label>
-          <div>Optimizer:</div>
-          <Select
-            className="Sel"
-            value={state.optimizer}
-            onChange={onOptimizerChange}
-            options={optimizers}
-          />
-        </label>
-        <label>
-          <div>Loss:</div>
-          <Select className="Sel" value={state.loss} onChange={onLossChange} options={lossess} />
-        </label>
-        <label>
-          <div>Metrics:</div>
-          <Select
-            className="Sel"
-            isMulti
-            value={state.metrics}
-            onChange={onMetricsChange}
-            options={metrics}
-          />
-        </label>
+      <form className="flex scroll pad fsb" onChange={onChange}>
+        <div className="flex vert">
+          <h3>Training Configuration</h3>
+          <label className="pad">
+            <div>Epochs:</div>
+            <input type="number" value={state.epochs} />
+          </label>
+          <label className="pad">
+            <div>Validation Split:</div>
+            <input type="number" value={state.split} />
+          </label>
+          <label className="pad">
+            <div>Learning rate:</div>
+            <input type="number" value={state.lr} />
+          </label>
+          <label className="pad">
+            <div>Batch size:</div>
+            <input type="number" value={state.batch} />
+          </label>
+        </div>
+        <div className="flex vert">
+          <h3>Model Configuration</h3>
+          <label>
+            <div>Optimizer:</div>
+            <Select
+              className="Sel"
+              value={state.optimizer}
+              onChange={onOptimizerChange}
+              options={optimizers}
+            />
+          </label>
+          <label>
+            <div>Loss:</div>
+            <Select className="Sel" value={state.loss} onChange={onLossChange} options={lossess} />
+          </label>
+          <label>
+            <div>Metrics:</div>
+            <Select
+              className="Sel"
+              isMulti
+              value={state.metrics}
+              onChange={onMetricsChange}
+              options={metrics}
+            />
+          </label>
+        </div>
       </form>
     </div>
   )

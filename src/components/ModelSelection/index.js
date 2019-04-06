@@ -73,22 +73,22 @@ const ModelSelection = ({ whole, setState, ...state }) => {
               <form onChange={e => formChange('lstm', e)} className="flex vert">
                 <label>
                   <div>Embedding dimension:</div>
-                  <input type="number" />
+                  <input type="number" value={state.formInfo.lstm.edim} />
                 </label>
                 <label>
                   <div>Layers:</div>
-                  <input type="number" />
+                  <input type="number" value={state.formInfo.lstm.layers} />
                 </label>
                 <label>
                   <div>Units:</div>
-                  <input type="string" />
+                  <input type="string" value={state.formInfo.lstm.units.join(',')}/>
                 </label>
                 <label>
                   <div>Dropout:</div>
-                  <input type="number" />
+                  <input type="number" value={state.formInfo.lstm.dropout}/>
                 </label>
                 <label>
-                  <input type="checkbox" />
+                  <input type="checkbox" checked={state.formInfo.lstm.bidirectional} />
                   <div>Bidirectional</div>
                 </label>
               </form>
@@ -96,23 +96,23 @@ const ModelSelection = ({ whole, setState, ...state }) => {
               <form onChange={e => formChange('cnn', e)} className="flex vert">
                 <label>
                   <div>Embedding dimension:</div>
-                  <input type="number" />
+                  <input type="number" value={state.formInfo.cnn.edim} />
                 </label>
                 <label>
                   <div>Filters:</div>
-                  <input type="number" />
+                  <input type="number" value={state.formInfo.cnn.filters} />
                 </label>
                 <label>
                   <div>Kernel size:</div>
-                  <input type="number" />
+                  <input type="number" value={state.formInfo.cnn.kernelSize} />
                 </label>
                 <label>
                   <div>Strides:</div>
-                  <input type="number" />
+                  <input type="number"  value={state.formInfo.cnn.strides}/>
                 </label>
                 <label>
                   <div>Dropout:</div>
-                  <input type="number" />
+                  <input type="number"  value={state.formInfo.cnn.dropout}/>
                 </label>
               </form>
             )}

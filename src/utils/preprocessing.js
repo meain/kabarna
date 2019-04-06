@@ -15,6 +15,10 @@ function tokenize(input, split = ' ') {
 }
 
 function padding(sentences, value, maxlen, padding) {
+  const sml = getMaxLen(sentences)
+  if (maxlen === null || sml > maxlen) {
+    maxlen = sml
+  }
   if (!maxlen) maxlen = getMaxLen(sentences)
   if (padding === 'pre')
     return {
@@ -90,6 +94,6 @@ export function prepare(
     map,
     labelMap,
     maxlen: cml,
-    embMatrix: getEmbMatrix(embedding, start, end),
+    embMatrix: embedding ? getEmbMatrix(embedding, start, end) : null,
   }
 }

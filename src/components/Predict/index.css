@@ -1,6 +1,7 @@
 .Predict > input {
-  font-size: 3rem;
+  font-size: 2rem;
   padding: 10px 30px;
+  width: 90%;
 }
 .Predict > div {
   font-size: 2rem;

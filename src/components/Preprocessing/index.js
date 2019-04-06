@@ -85,32 +85,32 @@ const Preprocessing = ({ whole, setState, ...state }) => {
         <form className="flex vert pad2 br f1" onChange={onChange}>
           <h3>OPTIONS</h3>
           <label>
-            <input type="checkbox" />
+            <input type="checkbox" checked={state.customPadding} />
             <div>Custom padding</div>
           </label>
           <label className={state.customPadding ? '' : 'hide'}>
             <div>Pad length:</div>
-            <input type="number" />
+            <input type="number" value={state.padding} />
           </label>
 
           <label>
-            <input type="checkbox" />
+            <input type="checkbox" checked={state.start} />
             <div>Start token</div>
           </label>
 
           <label>
-            <input type="checkbox" />
+            <input type="checkbox" checked={state.end} />
             <div>End token</div>
           </label>
 
           <label>
-            <input type="checkbox" />
+            <input type="checkbox" checked={state.lower} />
             <div>Lower input</div>
           </label>
         </form>
         <div className="f1 pad scroll">
           <h3>INPUT</h3>
-          {JSON.stringify(state.input || {})}
+          <pre>{JSON.stringify(state.input || {}, undefined, 2)}</pre>
         </div>
       </div>
     </div>

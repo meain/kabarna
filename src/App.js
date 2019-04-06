@@ -20,13 +20,12 @@ class App extends Component {
         padding: 0,
         start: false,
         end: false,
-        lower: false,
+        lower: true,
         input: undefined,
       },
       modelselection: {
         selectedOption: { value: 'lstm', label: 'LSTM' },
-        formInfo: {
-          lstm: {
+        formInfo: { lstm: {
             edim: 50,
             layers: 1,
             units: [100],
@@ -45,7 +44,7 @@ class App extends Component {
       training: {
         epochs: 10,
         split: 0.1,
-        batch: 5,
+        batch: 32,
         lr: 0.001,
         optimizer: null,
         loss: null,
@@ -69,7 +68,7 @@ class App extends Component {
 
         <div className="Footer flex center fsb pad shadow">
           <button className="btn">
-            <Link to="preprocessing">Preprocessing</Link>
+            <Link to="/" exact>Preprocessing</Link>
           </button>
           <button className="btn">
             <Link to="modelselection">Model Selection</Link>
@@ -84,7 +83,7 @@ class App extends Component {
 
         <Router className="f1">
           <Preprocessing
-            path="/preprocessing"
+            path="/"
             whole={this.state}
             {...this.state.preprocessing}
             setState={value => {
